@@ -1,0 +1,26 @@
+package routes
+
+import (
+	"github.com/kataras/iris/mvc"
+	"gitlab.com/z547743799/irissearch/bootstrap"
+	"gitlab.com/z547743799/irissearch/controller"
+	"gitlab.com/z547743799/irissearch/service"
+)
+
+// Configure registers the necessary routes to the app.
+func Configure(b *bootstrap.Bootstrapper) {
+
+	SearchService := service.NewTbSearchService()
+	Search := mvc.New(b.Party("/"))
+	Search.Register(SearchService)
+	Search.Handle(new(controller.PageController))
+
+	//admin := mvc.New(b.Party("/admin"))
+	//admin.Router.Use(middleware.BasicAuth)
+	//admin.Register(superstarService)
+	//admin.Handle(new(controllers.AdminController))
+
+	//b.Get("/follower/{id:long}", GetFollowerHandler)
+	//b.Get("/following/{id:long}", GetFollowingHandler)
+	//b.Get("/like/{id:long}", GetLikeHandler)
+}
